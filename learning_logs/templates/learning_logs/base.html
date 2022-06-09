@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Learning Log</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="description" content="" />
+    </head>
+    <body>
+    <header>
+        <h1><a href="{% url 'learning_logs:index' %}">Learning Log</a></h1>
+    </header>
+    <nav>
+        <a href="{% url 'learning_logs:topics' %}">Topics</a>
+    </nav>
+    {% block content %}{% endblock content %}
+    </body>
+</html>
