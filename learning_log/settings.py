@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from pathlib import Path
 from os import getenv
+from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -37,6 +38,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # My apps
     "learning_logs",
+    "users",
     # Default django apps
     "django.contrib.admin",
     "django.contrib.auth",
