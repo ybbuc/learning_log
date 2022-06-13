@@ -1,20 +1,10 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Learning Log</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="" />
-    </head>
-    <body>
-    <header>
-        <h1><a href="{% url 'learning_logs:index' %}">Learning Log</a></h1>
-    </header>
-    <nav>
-        <a href="{% url 'learning_logs:topics' %}">Topics</a>
-    </nav>
-    {% block content %}{% endblock content %}
-    </body>
+  <head>
+    <title>Learning Log</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="" />
     {% load static %}
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
@@ -24,4 +14,28 @@
       rel="stylesheet"
       type="text/css"
     />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <a class="logo" href="{% url 'learning_logs:index' %}">Learning Log</a>
+        <nav>
+          <ul>
+            <li><a href="{% url 'learning_logs:index' %}">Home</a></li>
+            <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+          </ul>
+          <span class="btn-wrap">
+          {% if user.is_authenticated %}
+          {{ user.username }}
+            <a href="{% url 'users:logout' %}">Log out</a>
+          {% else %}
+           <a href="{% url 'users:register' %}">Register</a>
+            <a href="{% url 'users:login' %}">Log in</a>
+          {% endif %}
+        </span>
+        </nav>
+      </header>
+      {% block content %}{% endblock content %}
+    </div>
+  </body>
 </html>
