@@ -1,3 +1,4 @@
+{% load django_bootstrap5 %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,34 +9,36 @@
     {% load static %}
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-    {% load sass_tags %}
-    <link
-      href="{% sass_src 'learning_logs/css/main.scss' %}"
-      rel="stylesheet"
-      type="text/css"
-    />
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
   </head>
   <body>
-    <div class="container">
-      <header>
-        <a class="logo" href="{% url 'learning_logs:index' %}">Learning Log</a>
-        <nav>
-          <ul>
-            <li><a href="{% url 'learning_logs:index' %}">Home</a></li>
-            <li><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+    <header class="p-3 mb-3 border-bottom">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="{% url 'learning_logs:index' %}" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+            <svg class="bi me-2" aria-hidden="true" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#8C5A3C" d="M15.14 0L8.99 6.14V2.99h-4v7.14L1.16 13.95c-1.562 1.56-1.562 4.09 0 5.657l3.196 3.19c1.56 1.56 4.09 1.56 5.657 0l13.97-13.98Z"/><path fill="#BE9664" d="M18.867 3.719l-3.574 3.57c-.391.391-.391 1.02 0 1.41 .19.19.45.29.7.29 .25 0 .51-.1.7-.3l3.57-3.574Z"/></svg>
+          </a>
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'learning_logs:index' %}" class="nav-link px-2 link-dark">Home</a></li>
+            <li><a href="{% url 'learning_logs:topics' %}" class="nav-link px-2 link-dark">Topics</a></li>
           </ul>
-          <span class="btn-wrap">
-          {% if user.is_authenticated %}
-          {{ user.username }}
-            <a href="{% url 'users:logout' %}">Log out</a>
-          {% else %}
-           <a href="{% url 'users:register' %}">Register</a>
-            <a href="{% url 'users:login' %}">Log in</a>
-          {% endif %}
-        </span>
-        </nav>
-      </header>
-      {% block content %}{% endblock content %}
+          <div class="text-end">
+            {% if user.is_authenticated %}
+            <div class="btn-group" role="group">
+              <span class="btn btn-outline-dark disabled">{{ user.username }}</span>
+              <a href="{% url 'users:logout' %}" class="btn btn-dark">Log out</a>
+            </div>
+            {% else %}
+            <a href="{% url 'users:login' %}" class="btn btn-outline-dark me-2">Log in</a>
+            <a href="{% url 'users:register' %}" class="btn btn-dark">Register</a>
+            {% endif %}
+          </div>
+        </div> 
+      </div>
+    </header>
+    <div class="container">
+    {% block content %}{% endblock content %}
     </div>
   </body>
 </html>

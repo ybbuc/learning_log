@@ -3,18 +3,19 @@
 <h2>Topic: {{ topic }}</h2>
 <h3>Entries:</h3>
 <p><a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a></p>
-<ul>
-  {% for entry in entries %}
-  <li>
-    <p>{{ entry.date_added|date:" M d, Y H:i"}}</p>
-    <p>{{ entry.text|linebreaks }}</p>
-    <p>
-      <a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
-    </p>
-  </li>
-  {% empty %}
-  <li>There are no entries for this topic yet.</li>
-  {% endfor %}
-</ul>
+{% for entry in entries %}
+<div class="card mb-3">
+  <div class="card-header">
+    {{ entry.date_added|date:" M d, Y H:i"}} <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a></small>
+  </div>
+  
+  <div class="card-body text-dark">
+    <p class="card-text">{{ entry.text|linebreaks }}</p>
+  </div>
+</div>
+{% empty %}
+<p>There are no entries for this topic yet.</p>
+{% endfor %}
 
 {% endblock content %}
+
